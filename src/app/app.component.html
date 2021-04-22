@@ -1,2 +1,4 @@
 <ngx-mat-ext-select [selectPlaceholder]="'Select a country'" [selectFieldWidth]="350" [selectNoItemsVisible]="8"
-  [selectItems]="selectItems" [searchData]="searchData" [selectFieldSize]="'small'" (itemSelected)="itemSelected($event)"></ngx-mat-ext-select>
+  [selectItems]="selectItems" [searchData]="searchData" [selectFieldSize]="'small'" [selectFieldAppearance]="'outline'"
+  [searchMultiple] = "true" [searchFilter]="true"
+  (itemSelected)="itemSelected($event)"></ngx-mat-ext-select>

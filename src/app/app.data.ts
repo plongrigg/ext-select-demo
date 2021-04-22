@@ -1981,7 +1981,7 @@ export const countryPops = countries.map(country =>
 
 // map to SelectItems
 export const selectItems: SelectItems = countryPops.map(cp => {
-  const icon: SelectItemIcon = { type: 'svg', id: cp.code, fieldDisplayGapPx: 20 };
+  const icon: SelectItemIcon = { type: 'svg', id: cp.code, fieldDisplayIconGapPx: 20 };
   const labels: SelectItemLabel[] = [
     { text: cp.country, fontSizePt: 10 },
     { text: `pop. ${cp.population.toLocaleString('en-US', { maximumFractionDigits: 0 })}`, fontSizePt: 8, style: {'font-style': 'italic'} }

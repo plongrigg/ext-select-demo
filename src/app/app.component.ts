@@ -18,12 +18,14 @@ export class AppComponent {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, preloader: SvgIconRegistryService) {
     // add into registry
-    countryPops.forEach(cp => iconRegistry.addSvgIcon(cp.code, sanitizer.bypassSecurityTrustResourceUrl(cp.imageUrl)));
+    countryPops
+      .forEach(cp => iconRegistry.addSvgIcon(cp.code, sanitizer.bypassSecurityTrustResourceUrl(cp.imageUrl)));
 
     // preload
     const obs = countryPops.map(cp => preloader.loadSvg(cp.imageUrl).pipe(
       take(1),
       catchError(e => {
+        //  add empty icon
         iconRegistry.addSvgIcon(cp.code, sanitizer.bypassSecurityTrustResourceUrl('assets/noflag.svg'));
         return of('');
       })));
