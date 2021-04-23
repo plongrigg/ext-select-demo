@@ -8,8 +8,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMatExtSelectModule } from '@fgrid-ngx/mat-ext-select';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-
-
 @NgModule({
   declarations: [
     AppComponent

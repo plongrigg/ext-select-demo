@@ -22,7 +22,7 @@
     "@angular/platform-browser": "~11.2.9",
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
-    "@fgrid-ngx/mat-searchbox": "^1.0.9",
+    "@fgrid-ngx/mat-searchbox": "^1.0.10",
     "@fgrid-ngx/mde": "^3.0.3",
     "angular-svg-icon": "^11.2.0",
     "rxjs": "~6.6.0",

@@ -1,5 +1,5 @@
-import { SelectItem, SelectItemIcon, SelectItemLabel, SelectItems } from "@fgrid-ngx/mat-ext-select";
-import { SearchData } from "@fgrid-ngx/mat-searchbox";
+import { SelectItem, SelectItemIcon, SelectItemLabel, SelectItems } from '@fgrid-ngx/mat-ext-select';
+import { SearchData } from '@fgrid-ngx/mat-searchbox';
 
 const countries = [
   {
@@ -1993,6 +1993,6 @@ export const selectItems: SelectItems = countryPops.map(cp => {
     return m;
   }, new Map<string | number, SelectItem>());
 
-// search data
+// Search data
 export const searchData: SearchData = countryPops.map(cp => [cp.country, cp.population]);
 
