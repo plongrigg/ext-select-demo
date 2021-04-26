@@ -1968,7 +1968,9 @@ const populations =
   }, {} as Record<string, number>);
 
 // localtion of images (flags)
-const baseImageLocation = 'assets';
+export const baseImageLocation = window.location.hostname.includes('stackblitz') ?  // stackblitz cannot handle static assets
+`https://raw.githubusercontent.com/plongrigg/ext-select-demo/master/src/assets` :
+'assets';
 
 // merge country with population
 export const countryPops = countries.map(country =>

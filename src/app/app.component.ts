@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SelectedItem, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
 import { SvgIconRegistryService } from 'angular-svg-icon';
-import { countryPops, searchData, selectItems } from './app.data';
+import { baseImageLocation, countryPops, searchData, selectItems } from './app.data';
 import { forkJoin, of } from 'rxjs';
 
 @Component({
@@ -54,11 +54,12 @@ export class AppComponent {
   // a little faster for multiple images
   private preloadImages(): void {
     // preload
+    const noflag = `${baseImageLocation}/noflag.svg`;
     const obs = countryPops.map(cp => this.preloader.loadSvg(cp.imageUrl).pipe(
       take(1),
       catchError(e => {
         //  add empty icon
-        this.iconRegistry.addSvgIcon(cp.code, this.sanitizer.bypassSecurityTrustResourceUrl('assets/noflag.svg'));
+        this.iconRegistry.addSvgIcon(cp.code, this.sanitizer.bypassSecurityTrustResourceUrl(noflag));
         return of('');
       })));
     forkJoin(obs).subscribe(() => console.log('preload complete'));
