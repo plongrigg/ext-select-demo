@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMatExtSelectModule } from '@fgrid-ngx/mat-ext-select';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularSvgIconModule } from 'angular-svg-icon';
 @NgModule({
   declarations: [
     AppComponent
@@ -19,8 +18,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     MatToolbarModule,
     FlexLayoutModule,
     HttpClientModule,
-    NgxMatExtSelectModule,
-    AngularSvgIconModule.forRoot()
+    NgxMatExtSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

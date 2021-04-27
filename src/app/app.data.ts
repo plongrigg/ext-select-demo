@@ -1967,7 +1967,7 @@ const populations =
     return map;
   }, {} as Record<string, number>);
 
-// localtion of images (flags)
+// location of images (flags)
 export const baseImageLocation = window.location.hostname.includes('stackblitz') ?  // stackblitz cannot handle static assets
 `https://raw.githubusercontent.com/plongrigg/ext-select-demo/master/src/assets` :
 'assets';
@@ -1982,18 +1982,14 @@ export const countryPops = countries.map(country =>
 }));
 
 // map to SelectItems
-export const selectItems: SelectItems = countryPops.map(cp => {
+export const selectItems: SelectItems = new Map(countryPops.map(cp => {
   const icon: SelectItemIcon = { type: 'svg', id: cp.code, fieldDisplayIconGapPx: 20 };
   const labels: SelectItemLabel[] = [
     { text: cp.country, fontSizePt: 10 },
     { text: `pop. ${cp.population.toLocaleString('en-US', { maximumFractionDigits: 0 })}`, fontSizePt: 8, style: {'font-style': 'italic'} }
   ];
-  return { value: cp.code, icon, labels, display: cp.country, selected: cp.code === 'CA' ? true : false };
-})
-  .reduce((m, item) => {
-    m.set(item.value, item);
-    return m;
-  }, new Map<string | number, SelectItem>());
+  return [cp.code, {value: cp.code, icon, labels, display: cp.country, selected: cp.code === 'CA' ? true : false }];
+}));
 
 // Search data
 export const searchData: SearchData = countryPops.map(cp => [cp.country, cp.population]);

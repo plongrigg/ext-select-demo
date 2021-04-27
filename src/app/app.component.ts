@@ -1,12 +1,11 @@
-import { catchError, take } from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SelectedItem, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
-import { SvgIconRegistryService } from 'angular-svg-icon';
 import { baseImageLocation, countryPops, searchData, selectItems } from './app.data';
-import { forkJoin, of } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +17,8 @@ export class AppComponent {
 
   public selectedCountry = '';
 
-  constructor(private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer, private preloader: SvgIconRegistryService) {
+  constructor(private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
     this.registerImages();
-    this.preloadImages();
 
     // set initial selected values
     const initialSelection = Array.from(selectItems.values()).filter(selectItem => selectItem.selected)[0];
@@ -38,30 +36,29 @@ export class AppComponent {
   public get selectItems(): SelectItems { return selectItems; }
 
   /**
-   * In this case the search data is supplied rather than allowing the component to derived it from
+   * In this case the search data is supplied rather than allowing the component to derive it from
    * the selection data, as we want the population to be searched as a numeric (for range searches), while it is presended as text in
    * the select data
    */
   public get searchData(): SearchData { return searchData; }
 
-  // add images to icon regsitry
+  /**
+   * Add images for flags to registry and preload
+   */
   private registerImages(): void {
+    const noflag = this.sanitizer.bypassSecurityTrustResourceUrl(`${baseImageLocation}/noflag.svg`);
     countryPops
-      .forEach(cp => this.iconRegistry.addSvgIcon(cp.code, this.sanitizer.bypassSecurityTrustResourceUrl(cp.imageUrl)));
-  }
+      .forEach(cp => {
+        // register svg
+        const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(cp.imageUrl);
+        this.iconRegistry.addSvgIcon(cp.code, safeUrl);
 
-  // preload images - this step is not necessary if there are only a few images,  but makes the startup
-  // a little faster for multiple images
-  private preloadImages(): void {
-    // preload
-    const noflag = `${baseImageLocation}/noflag.svg`;
-    const obs = countryPops.map(cp => this.preloader.loadSvg(cp.imageUrl).pipe(
-      take(1),
-      catchError(e => {
-        //  add empty icon
-        this.iconRegistry.addSvgIcon(cp.code, this.sanitizer.bypassSecurityTrustResourceUrl(noflag));
-        return of('');
-      })));
-    forkJoin(obs).subscribe(() => console.log('preload complete'));
+        // preload images - this step is not necessary if there are only a few images,  but makes the startup
+        // a little faster for multiple images
+        this.iconRegistry.getSvgIconFromUrl(safeUrl).pipe(take(1), catchError(e => {
+          this.iconRegistry.addSvgIcon(cp.code, noflag);
+          return of();
+        })).subscribe();
+      });
   }
 }
