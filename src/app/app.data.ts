@@ -1,4 +1,4 @@
-import { SelectItem, SelectItemIcon, SelectItemLabel, SelectItems } from '@fgrid-ngx/mat-ext-select';
+import { SelectItemIcon, SelectItemLabel, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
 
 const countries = [
