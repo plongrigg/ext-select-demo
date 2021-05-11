@@ -3,9 +3,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SelectedItem, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
-import { baseImageLocation, countryPops, searchData, selectItems } from './app.data';
-import { catchError, take } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { searchData, selectItems } from './app.data';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +16,6 @@ export class AppComponent {
   public selectedCountry = '';
 
   constructor(private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
-    this.registerImages();
-
     // set initial selected values
     const initialSelection = Array.from(selectItems.values()).filter(selectItem => selectItem.selected)[0];
     this.selectedCountry = initialSelection ? initialSelection.display : '';
@@ -41,24 +37,4 @@ export class AppComponent {
    * the select data
    */
   public get searchData(): SearchData { return searchData; }
-
-  /**
-   * Add images for flags to registry and preload
-   */
-  private registerImages(): void {
-    const noflag = this.sanitizer.bypassSecurityTrustResourceUrl(`${baseImageLocation}/noflag.svg`);
-    countryPops
-      .forEach(cp => {
-        // register svg
-        const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(cp.imageUrl);
-        this.iconRegistry.addSvgIcon(cp.code, safeUrl);
-
-        // preload images - this step is not necessary if there are only a few images,  but makes the startup
-        // a little faster for multiple images
-        this.iconRegistry.getSvgIconFromUrl(safeUrl).pipe(take(1), catchError(e => {
-          this.iconRegistry.addSvgIcon(cp.code, noflag);
-          return of();
-        })).subscribe();
-      });
-  }
 }

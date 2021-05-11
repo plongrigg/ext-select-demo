@@ -1973,7 +1973,7 @@ export const baseImageLocation = window.location.hostname.includes('stackblitz')
 'assets';
 
 // merge country with population
-export const countryPops = countries.map(country =>
+const countryPops = countries.map(country =>
 ({
   code: country.code,
   country: country.country,
@@ -1983,7 +1983,7 @@ export const countryPops = countries.map(country =>
 
 // map to SelectItems
 export const selectItems: SelectItems = new Map(countryPops.map(cp => {
-  const icon: SelectItemIcon = { type: 'svg', id: cp.code, fieldDisplayIconGapPx: 20 };
+  const icon: SelectItemIcon = { type: 'svg', id: cp.code, fieldDisplayIconGapPx: 20, url: cp.imageUrl };
   const labels: SelectItemLabel[] = [
     { text: cp.country, fontSizePt: 10 },
     { text: `pop. ${cp.population.toLocaleString('en-US', { maximumFractionDigits: 0 })}`, fontSizePt: 8, style: {'font-style': 'italic'} }
