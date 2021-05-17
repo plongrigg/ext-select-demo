@@ -1,3 +1,4 @@
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     FlexLayoutModule,
     HttpClientModule,
-    NgxMatExtSelectModule
+    NgxMatExtSelectModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

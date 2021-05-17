@@ -1,4 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+/* font added to deal with missing flag emojis on windows, (except for firefox)*/
+@font-face {
+  font-family: NotoColorEmoji;
+  unicode-range: U+1F1E6-1F1FF;
+  src: url("/assets/NotoColorEmoji.woff") format('woff');
+}
 
+/* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-typography, .mat-list-option, .mat-form-field {
+  font-family:  Roboto, "Helvetica Neue", sans-serif, "NotoColorEmoji";
+}
+
+

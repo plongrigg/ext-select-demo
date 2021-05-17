@@ -1,22 +1,22 @@
-<div fxLayout="column" fxLayoutGap="10px">
+<div fxLayout="column" fxLayoutGap="5px">
+  <span fxFlex="2px"></span>
+
+  <!--switch icon type-->
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <span fxFlex="12px"></span>
+    <mat-button-toggle-group [value]="iconType" (change)="switchIconType($event)">
+      <mat-button-toggle value="svg">Svg</mat-button-toggle>
+      <mat-button-toggle value="emoji">Emoji</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <!--select component-->
   <div [style.height.px]="90" fxLayout="row" fxLayoutAlign="start center">
     <span fxFlex="12px"></span>
-    <!--select component-->
-    <ngx-mat-ext-select
-      [selectPlaceholder]="'Select a country'"
-      [selectFieldWidth]="350"
-      [selectNoItemsVisible]="8"
-      [selectItems]="selectItems"
-      [searchData]="searchData"
-      [selectFieldSize]="'small'"
-      [selectFieldAppearance]="'outline'"
-      [searchFilter]="true"
-      [selectDDOffsetY] = "0"
-      [selectDDOffsetX] = "0"
-      [selectVirtualScroll] = "true"
-      [selectSearch] = "true"
-      [selectDDWidth] = "350"
-      (itemSelected)="itemSelected($event)">
+    <ngx-mat-ext-select [selectPlaceholder]="'Select a country'" [selectFieldWidth]="350" [selectNoItemsVisible]="8"
+      [selectItems]="selectItems" [selectedItem]="selectedCountry" [searchData]="searchData" [selectFieldSize]="'small'"
+      [selectFieldAppearance]="'outline'" [searchFilter]="true" [selectDDOffsetY]="0" [selectDDOffsetX]="0"
+      [selectVirtualScroll]="true" [selectSearch]="true" [selectDDWidth]="350" (itemSelected)="itemSelected($event)">
     </ngx-mat-ext-select>
   </div>
 
@@ -25,6 +25,6 @@
     <span fxFlex="12px"></span>
     <span>Selected country:</span>
     <span fxFlex="4px"></span>
-    <span [style.font-size.pt]="14">{{selectedCountry}}</span>
+    <span [style.font-size.pt]="14">{{selectedCountry?.display || ''}}</span>
   </div>
 </div>

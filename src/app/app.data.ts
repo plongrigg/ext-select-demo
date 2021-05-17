@@ -1,4 +1,4 @@
-import { SelectItemIcon, SelectItemLabel, SelectItems } from '@fgrid-ngx/mat-ext-select';
+import { SelectItem, SelectItemIcon, SelectItemLabel, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
 
 const countries = [
@@ -646,10 +646,10 @@ const countries = [
     country: 'North Korea',
     code: 'KP'
   },
-  {
-    country: 'Northern Ireland',
-    code: 'GB'
-  },
+  //{
+  //  country: 'Northern Ireland',
+  //  code: 'GB'
+  //},
   {
     country: 'Northern Mariana Islands',
     code: 'MP'
@@ -924,7 +924,7 @@ const countries = [
   },
   {
     country: 'United Kingdom',
-    code: 'UK'
+    code: 'GB'
   },
   {
     country: 'United States',
@@ -1969,8 +1969,8 @@ const populations =
 
 // location of images (flags)
 export const baseImageLocation = window.location.hostname.includes('stackblitz') ?  // stackblitz cannot handle static assets
-`https://raw.githubusercontent.com/plongrigg/ext-select-demo/master/src/assets` :
-'assets';
+  `https://raw.githubusercontent.com/plongrigg/ext-select-demo/master/src/assets` :
+  'assets';
 
 // merge country with population
 const countryPops = countries.map(country =>
@@ -1981,15 +1981,40 @@ const countryPops = countries.map(country =>
   imageUrl: `${baseImageLocation}/${country.code.toLowerCase()}.svg`
 }));
 
-// map to SelectItems
-export const selectItems: SelectItems = new Map(countryPops.map(cp => {
+// converts a country code to a unicode emoji
+const toFlag = (code: string): string => {
+  const exceptions = ['TP', 'AN'];
+  if (exceptions.includes(code.toUpperCase())) {
+    return '🏳️';
+  }
+
+  const base = 127462 - 65;
+  const cc = code.toUpperCase();
+  const res = String.fromCodePoint(...cc.split('').map(c => base + c.charCodeAt(0)));
+  return res;
+};
+
+const selectItems: SelectItem[] = countryPops.map(cp => {
   const icon: SelectItemIcon = { type: 'svg', id: cp.code, fieldDisplayIconGapPx: 20, url: cp.imageUrl };
   const labels: SelectItemLabel[] = [
     { text: cp.country, fontSizePt: 10 },
-    { text: `pop. ${cp.population.toLocaleString('en-US', { maximumFractionDigits: 0 })}`, fontSizePt: 8, style: {'font-style': 'italic'} }
+    {
+      text: `pop. ${cp.population.toLocaleString('en-US', { maximumFractionDigits: 0 })}`,
+      fontSizePt: 8, style: { 'font-style': 'italic' }
+    }
   ];
-  return [cp.code, {value: cp.code, icon, labels, display: cp.country, selected: cp.code === 'CA' ? true : false }];
+  return { value: cp.code, icon, labels, display: cp.country, selected: cp.code === 'CA' ? true : false };
+});
+
+// map to SelectItems (with svg icons and emojis)
+export const selectItemsSvg: SelectItems = new Map(selectItems.map(selectItem => {
+  return [selectItem.value ?? '', selectItem];
 }));
+
+export const selectItemsEmoji: SelectItems = new Map(selectItems.map(selectItem => {
+  return [selectItem.value ?? '', {...selectItem, icon: {type: 'emoji', id: toFlag(selectItem.icon?.id ?? ''), fieldDisplayIconGapPx: 20}}];
+}));
+
 
 // Search data
 export const searchData: SearchData = countryPops.map(cp => [cp.country, cp.population]);
