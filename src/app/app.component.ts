@@ -38,11 +38,11 @@ export class AppComponent {
    */
   public get searchData(): SearchData { return searchData; }
 
-  /** switch icon type to demo svg and emojis */
+  /** switch icon type to demo svg vs emojis */
   public switchIconType(change: MatButtonToggleChange): void {
     this.iconType = change.value;
 
-    // prompts chnage to selected item to redraw icon
+    // prompts change to selected item to redraw icon
     if (this.selectedCountry) {
       this.selectedCountry = { ...this.selectedCountry };
     }
