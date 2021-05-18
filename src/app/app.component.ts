@@ -14,7 +14,7 @@ export class AppComponent {
 
   public selectedCountry?: SelectedItem;
 
-  public iconType: 'svg' | 'emoji' = 'svg';
+  public iconType: 'svg' | 'emoji' = 'emoji';
 
   constructor() {
     // set initial selected values
