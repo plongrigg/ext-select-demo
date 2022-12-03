@@ -1,6 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { SelectedItem, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
@@ -18,20 +17,26 @@ export class AppComponent {
 
   public iconType: 'svg' | 'emoji' = 'emoji';
 
-  public formGroup = new UntypedFormGroup({ countries: new UntypedFormControl('GB') });
+  public formGroup = new FormGroup({ country: new FormControl<string | number | null>('GB') });
 
   constructor() {
     // set initial selected values
     const initialSelection = Array.from(selectItemsSvg.values()).filter(selectItem => selectItem.selected)[0];
     this.selectedCountry = initialSelection ? { value: initialSelection.value || '', display: initialSelection.display } : undefined;
+    this.formGroup.setValue({country: this.selectedCountry?.value ?? ''});
 
-    this.formGroup.valueChanges.subscribe(v => console.log(v));
+    // responds to selection (form-based control)
+    this.formGroup.valueChanges.subscribe(v => {
+      const value = v.country;
+      if (!value) { return; }
+      this.selectedCountry = { value, display: this.selectItems.get(value)?.display ?? '' };
+    });
   }
 
-  /** responds to selection */
+  /** responds to selection - non-form based control */
   public itemSelected(selectedItem?: SelectedItem): void {
     this.selectedCountry = selectedItem || undefined;
-    console.log(selectedItem, selectItemsSvg.get(selectedItem?.value || ''));
+    this.formGroup.setValue({ country: this.selectedCountry?.value ?? null });
   }
 
   /** items to display in the drop-down component */
@@ -55,8 +60,8 @@ export class AppComponent {
 
     // prompts change in form
     setTimeout(() => {
-      this.formGroup.setValue({ countries: '' });
-      this.formGroup.setValue({ countries: this.selectedCountry?.value });
+      this.formGroup.setValue({ country: '' });
+      this.formGroup.setValue({ country: this.selectedCountry?.value ?? null });
     });
   }
 

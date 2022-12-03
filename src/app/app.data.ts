@@ -646,10 +646,6 @@ const countries = [
     country: 'North Korea',
     code: 'KP'
   },
-  //{
-  //  country: 'Northern Ireland',
-  //  code: 'GB'
-  //},
   {
     country: 'Northern Mariana Islands',
     code: 'MP'
