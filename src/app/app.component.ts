@@ -1,6 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { SelectedItem, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
@@ -18,7 +18,7 @@ export class AppComponent {
 
   public iconType: 'svg' | 'emoji' = 'emoji';
 
-  public formGroup = new FormGroup({ countries: new FormControl('GB') });
+  public formGroup = new UntypedFormGroup({ countries: new UntypedFormControl('GB') });
 
   constructor() {
     // set initial selected values
