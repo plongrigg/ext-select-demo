@@ -1,4 +1,6 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { SelectedItem, SelectItems } from '@fgrid-ngx/mat-ext-select';
 import { SearchData } from '@fgrid-ngx/mat-searchbox';
@@ -16,10 +18,14 @@ export class AppComponent {
 
   public iconType: 'svg' | 'emoji' = 'emoji';
 
+  public formGroup = new FormGroup({ countries: new FormControl('GB') });
+
   constructor() {
     // set initial selected values
     const initialSelection = Array.from(selectItemsSvg.values()).filter(selectItem => selectItem.selected)[0];
     this.selectedCountry = initialSelection ? { value: initialSelection.value || '', display: initialSelection.display } : undefined;
+
+    this.formGroup.valueChanges.subscribe(v => console.log(v));
   }
 
   /** responds to selection */
@@ -46,6 +52,14 @@ export class AppComponent {
     if (this.selectedCountry) {
       this.selectedCountry = { ...this.selectedCountry };
     }
+
+    // prompts change in form
+    setTimeout(() => {
+      this.formGroup.setValue({ countries: '' });
+      this.formGroup.setValue({ countries: this.selectedCountry?.value });
+    });
   }
+
+
 
 }
