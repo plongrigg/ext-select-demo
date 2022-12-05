@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "install-lib": "ng cache clean && npm cache clean --force && npm install ../ext-select/dist/ngx-mat-ext-select/fgrid-ngx-mat-ext-select-1.0.13.tgz --force"
   },
   "private": true,
   "dependencies": {

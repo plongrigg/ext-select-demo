@@ -2008,8 +2008,11 @@ export const selectItemsSvg: SelectItems = new Map(selectItems.map(selectItem =>
 }));
 
 export const selectItemsEmoji: SelectItems = new Map(selectItems.map(selectItem => {
-  return [selectItem.value ?? '', {...selectItem, icon: {type: 'emoji', id: toFlag(selectItem.icon?.id ?? ''), fieldDisplayIconGapPx: 20}}];
+  return [selectItem.value ?? '',
+  {...selectItem, icon: {type: 'emoji', id: toFlag(selectItem.icon?.id ?? ''), fieldDisplayIconGapPx: 20}}];
 }));
+
+
 
 
 // Search data
