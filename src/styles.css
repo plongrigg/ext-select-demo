@@ -10,11 +10,13 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-.mat-typography, .mat-list-option, .mat-form-field {
+.mat-typography, .mat-list-option, .mat-form-field, .mat-mdc-list-option, .mat-mdc-form-field {
   font-family:  Roboto, "Helvetica Neue", sans-serif, "NotoColorEmoji";
 }
 
-
+.ngx-mat-ext-select-emoji {
+  font-family:  Roboto, "Helvetica Neue", sans-serif, "NotoColorEmoji" !important;
+}
 
 
 
