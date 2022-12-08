@@ -2,7 +2,7 @@
   <span fxFlex="2px"></span>
 
   <!--switch icon type-->
-  <div fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center" [style.z-index]="1001">
     <span fxFlex="12px"></span>
     <mat-button-toggle-group [value]="iconType" (change)="switchIconType($event)">
       <mat-button-toggle value="svg">Svg</mat-button-toggle>
