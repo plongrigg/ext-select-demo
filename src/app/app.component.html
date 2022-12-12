@@ -2,7 +2,7 @@
   <span fxFlex="2px"></span>
 
   <!--switch icon type-->
-  <div fxLayout="row" fxLayoutAlign="start center" [style.z-index]="1001">
+  <div fxLayout="row" fxLayoutAlign="start center">
     <span fxFlex="12px"></span>
     <mat-button-toggle-group [value]="iconType" (change)="switchIconType($event)">
       <mat-button-toggle value="svg">Svg</mat-button-toggle>
@@ -16,7 +16,9 @@
     <ngx-mat-ext-select [selectPlaceholder]="'Select a country'" [selectFieldWidth]="350" [selectNoItemsVisible]="12"
       [selectItems]="selectItems" [selectedItem]="selectedCountry" [searchData]="searchData" [selectFieldSize]="'small'"
       [selectFieldAppearance]="'outline'" [searchFilter]="true" [selectDDOffsetY]="0" [selectDDOffsetX]="0"
-      [selectVirtualScroll]="true" [selectSearch]="true" [selectDDWidth]="450" [selectDisabled]="false" (itemSelected)="itemSelected($event)">
+      [selectVirtualScroll]="true" [selectSearch]="true" [selectDDWidth]="450" [selectDisabled]="false"
+      [selectPropogateBackdropClick]="true"
+      (itemSelected)="itemSelected($event)">
     </ngx-mat-ext-select>
   </div>
 
@@ -25,7 +27,7 @@
     <ngx-mat-ext-select formControlName = "country" [selectPlaceholder]="'Select a country'" [selectFieldWidth]="450" [selectNoItemsVisible]="8"
       [selectItems]="selectItems" [searchData]="searchData" [selectFieldSize]="'default'"
       [selectFieldAppearance]="'fill'" [searchFilter]="true" [selectDDOffsetY]="0" [selectDDOffsetX]="0"
-      [selectVirtualScroll]="true" [selectSearch]="true" [selectDDWidth]="450">
+      [selectVirtualScroll]="true" [selectSearch]="true" [selectDDWidth]="450" [selectPropogateBackdropClick]="true">
     </ngx-mat-ext-select>
   </form>
 
