@@ -76,18 +76,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ext-select-demo:build"
+            "buildTarget": "ext-select-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ext-select-demo:build:production"
+              "buildTarget": "ext-select-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ext-select-demo:build"
+            "buildTarget": "ext-select-demo:build"
           }
         },
         "test": {

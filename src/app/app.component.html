@@ -10,12 +10,12 @@
     </mat-button-toggle-group>
   </div>
 
-  <!--select component-->
+  <!--select components-->
   <div [style.height.px]="90" fxLayout="row" fxLayoutAlign="start center">
     <span fxFlex="12px"></span>
     <ngx-mat-ext-select [selectPlaceholder]="'Select a country'" [selectFieldWidth]="350" [selectNoItemsVisible]="12"
       [selectItems]="selectItems" [selectedItem]="selectedCountry" [searchData]="searchData" [selectFieldSize]="'small'"
-      [selectFieldAppearance]="'outline'" [searchFilter]="true" [selectDDOffsetY]="0" [selectDDOffsetX]="0"
+      [selectFieldAppearance]="'outline'" [searchFilter]="true" [selectDDOffsetY]="40" [selectDDOffsetX]="0"
       [selectVirtualScroll]="true" [selectSearch]="true" [selectDDWidth]="450" [selectDisabled]="false"
       [selectPropogateBackdropClick]="true"
       (itemSelected)="itemSelected($event)">
